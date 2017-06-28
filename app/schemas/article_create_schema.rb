@@ -1,4 +1,4 @@
-CreateArticleSchema = Dry::Validation.Form do
+ArticleCreateSchema = Dry::Validation.Form do
   required(:article).schema do
     required(:title).filled(:str?)
     required(:content).filled(:str?)
@@ -8,3 +8,4 @@ CreateArticleSchema = Dry::Validation.Form do
     required(:nickname).filled(:str?)
   end
 end
+

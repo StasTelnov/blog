@@ -1,7 +1,7 @@
-class CreateArticleService
+class ArticleCreateService
   def initialize(request)
     @request = request
-    @schema = CreateArticleSchema
+    @schema = ArticleCreateSchema
   end
 
   def process
@@ -9,7 +9,7 @@ class CreateArticleService
 
     if result.success?
       article = Article.new(result.output[:article])
-      article.user = User.find_or_create_by(:nickname => result.output[:user][:nickname])
+      article.user = User.find_or_create_by(nickname: result.output[:user][:nickname])
       article.save!
 
       ResultService.new(true, article)
@@ -25,7 +25,9 @@ class CreateArticleService
   end
 
   def params
-    @request.parameters.deep_merge({:article => {:user_ip => @request.remote_ip}})
+    @request.parameters.deep_merge(article: { user_ip: @request.remote_ip })
   end
 end
+
+
 

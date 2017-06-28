@@ -3,12 +3,13 @@ class Article < ApplicationRecord
   has_many :ratings
 
   class << self
-    def top_rating(limit = 10)
-      order(:average_rating => :desc).limit(limit)
+    def top_rating(limit)
+      order(average_rating: :desc).limit(limit || 10).pluck(:title, :content)
     end
 
     def public_ips
-      group(:user_ip).having('count(DISTINCT user_id) > 1').pluck(:user_ip)
+      joins(:user).group(:user_ip).having('count(DISTINCT "articles"."user_id") > 1')
+                  .pluck(:user_ip, 'array_agg(DISTINCT "users"."nickname") as nicknames')
     end
   end
 end

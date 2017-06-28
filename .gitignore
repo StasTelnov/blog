@@ -16,5 +16,7 @@
 .byebug_history
 .idea
 .rvmrc
+.ruby-version
+.ruby-gemset
 
 config/database.yml
