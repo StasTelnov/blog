@@ -30,17 +30,16 @@ gem 'dry-validation', '~> 0.10.7'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'database_cleaner'
+  gem 'faker', '~> 1.7.3'
 end
 
 # group :test do
 #   gem 'rspec-rails'
 #   gem 'factory_girl_rails'
-#   gem 'faker'
-#   gem 'database_cleaner'
 # end
 
 group :development do
-  gem 'faker', '~> 1.7.3'
   gem 'httparty', '~> 0.15.5'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'rubocop', '~> 0.49.1'

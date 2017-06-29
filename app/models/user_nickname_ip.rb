@@ -1,0 +1,2 @@
+class UserNicknameIp < ApplicationRecord
+end

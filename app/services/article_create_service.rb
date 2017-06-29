@@ -21,12 +21,9 @@ class ArticleCreateService
   private
 
   def validate
-    @schema.call(params)
+    @schema.call(@request.parameters)
   end
 
-  def params
-    @request.parameters.deep_merge(article: { user_ip: @request.remote_ip })
-  end
 end
 
 

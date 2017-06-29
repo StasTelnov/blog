@@ -26,10 +26,6 @@ class RatingCreateService
   private
 
   def validate
-    @schema.call(params)
-  end
-
-  def params
-    @request.parameters
+    @schema.call(@request.parameters)
   end
 end

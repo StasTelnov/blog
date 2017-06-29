@@ -1,6 +1,6 @@
 class Article < ApplicationRecord
   belongs_to :user
-  has_many :ratings
+  has_many :ratings, dependent: :destroy
 
   class << self
     def top_rating(limit)
@@ -8,8 +8,8 @@ class Article < ApplicationRecord
     end
 
     def public_ips
-      joins(:user).group(:user_ip).having('count(DISTINCT "articles"."user_id") > 1')
-                  .pluck(:user_ip, 'array_agg(DISTINCT "users"."nickname") as nicknames')
+      UserNicknameIp.group(:user_ip).having('count("user_nickname_ips"."nickname") >= 2')
+                    .pluck(:user_ip, 'array_agg("user_nickname_ips"."nickname") as nicknames')
     end
   end
 end

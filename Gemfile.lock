@@ -43,6 +43,7 @@ GEM
     builder (3.2.3)
     byebug (9.0.6)
     concurrent-ruby (1.0.5)
+    database_cleaner (1.6.1)
     dry-configurable (0.7.0)
       concurrent-ruby (~> 1.0)
     dry-container (0.6.0)
@@ -171,6 +172,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  database_cleaner
   dry-validation (~> 0.10.7)
   faker (~> 1.7.3)
   httparty (~> 0.15.5)
