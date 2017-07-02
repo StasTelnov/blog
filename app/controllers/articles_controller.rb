@@ -1,12 +1,6 @@
 class ArticlesController < ApplicationController
   def create
-    service = ArticleCreateService.new(request).process
-
-    if service.success?
-      render json: service.result
-    else
-      render json: service.result, status: 422
-    end
+    render ArticleCreateService.new(request).process.result
   end
 
   def top_rating

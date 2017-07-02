@@ -1,12 +1,21 @@
 class ResultService
-  attr_reader :result
-
-  def initialize(success, result)
+  def initialize(success, data, status=nil)
     @success = success
-    @result = result
+    @data = data
+    @status = status
   end
 
-  def success?
-    @success
+  def result
+    {json: @data, status: status}
+  end
+
+  private
+
+  def status
+    @status || default_status
+  end
+
+  def default_status
+    @success ? 201 : 422
   end
 end

@@ -13,14 +13,17 @@ class RatingCreateService
 
       article.with_lock do
         article.ratings.create(value: result.output[:rating][:value])
-        average_rating = Article.joins(:ratings).where('articles.id' => article.id).average(:value)
+        average_rating = Rating.where('article_id' => article.id).average(:value)
         article.update_attributes(average_rating: average_rating)
       end
 
-      ResultService.new(true, average_rating)
+      ResultService.new(true, average_rating: average_rating)
     else
       ResultService.new(false, result.messages)
     end
+
+  rescue ActiveRecord::RecordNotFound => e
+    ResultService.new(false, { article: e.message }, 404)
   end
 
   private

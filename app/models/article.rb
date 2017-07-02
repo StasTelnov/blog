@@ -4,7 +4,7 @@ class Article < ApplicationRecord
 
   class << self
     def top_rating(limit)
-      order(average_rating: :desc).limit(limit || 10).pluck(:title, :content)
+      order(average_rating: :desc).limit(limit).pluck(:title, :content)
     end
 
     def public_ips
