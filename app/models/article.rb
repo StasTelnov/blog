@@ -8,8 +8,8 @@ class Article < ApplicationRecord
     end
 
     def public_ips
-      UserNicknameIp.group(:user_ip).having('count("user_nickname_ips"."nickname") >= 2')
-                    .pluck(:user_ip, 'array_agg("user_nickname_ips"."nickname") as nicknames')
+      UserIp.joins(:user).group(:user_ip).having('count("users"."nickname") >= 2')
+            .pluck(:user_ip, 'array_agg("users"."nickname") as nicknames')
     end
   end
 end

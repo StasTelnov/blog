@@ -12,7 +12,7 @@ class ArticleCreateService
       article.user = User.find_or_create_by(nickname: result.output[:user][:nickname])
       article.save!
 
-      UserNicknameIp.after_create_article(article)
+      UserIp.after_create_article(article)
 
       ResultService.new(true, article)
     else

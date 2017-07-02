@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170629232251) do
+ActiveRecord::Schema.define(version: 20170629203833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,10 +35,11 @@ ActiveRecord::Schema.define(version: 20170629232251) do
     t.index ["article_id"], name: "index_ratings_on_article_id"
   end
 
-  create_table "user_nickname_ips", force: :cascade do |t|
+  create_table "user_ips", force: :cascade do |t|
     t.inet "user_ip", null: false
-    t.string "nickname", null: false
-    t.index ["user_ip", "nickname"], name: "index_user_nickname_ips_on_user_ip_and_nickname", unique: true
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_user_ips_on_user_id"
+    t.index ["user_ip", "user_id"], name: "index_user_ips_on_user_ip_and_user_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -50,4 +51,5 @@ ActiveRecord::Schema.define(version: 20170629232251) do
 
   add_foreign_key "articles", "users"
   add_foreign_key "ratings", "articles"
+  add_foreign_key "user_ips", "users"
 end

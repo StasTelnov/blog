@@ -36,7 +36,7 @@ else
 
   # create articles
   create_article_path = base_path + '/articles'
-  1.times do |n|
+  200.times do |n|
     1000.times do
       response = HTTParty.post(create_article_path, {
           body: {
@@ -69,7 +69,7 @@ else
         end
       end
     end
-    puts "=== #{n + 1} thousand articles"
+    puts "=== #{n + 1} thousand articles populated"
   end
   puts '=== SEED DATA FINISH POPULATED'
 end
